@@ -1,0 +1,38 @@
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+.container{
+    max-width: 1000px;
+    /*border:solid;*/
+}
+
+.btn-stamp button{
+    margin-right: 5px;
+    width: 90px;
+}
+.btn-image{
+    width: 170px!important;
+}
+.btn-group{
+    max-width: 800px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.comment_list {
+    margin: 0 auto;
+    max-width: 800px;
+    max-height: 900px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: solid darkgray;
+    padding: 2px;
+}
