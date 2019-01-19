@@ -3,6 +3,7 @@
   "version": "0.0.3",
   "main": "server.js",
   "dependencies": {
+    "basic-auth-connect": "^1.0.0",
     "body-parser": "^1.18.3",
     "console-stamp": "^0.2.5",
     "data-utils": "0.0.2",

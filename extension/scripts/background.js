@@ -1,6 +1,6 @@
 /* global chrome */
 (function () {
-  let enabled = false
+  let enabled = false;
 
   // get stored settings
   chrome.storage.sync.get({ enabled: true }, function (items) {

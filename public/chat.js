@@ -28,7 +28,7 @@ $(function () {
 })
 
 $(function () {
-    let socket = io.connect('http://localhost:80');
+    let socket = io.connect();
 
     socket.on('connect', function () {
         socket.emit('msg update');
@@ -36,15 +36,17 @@ $(function () {
 
     $('#comment-btn').click(function () {
         let message = $('#comment-input');
-        if (message.val().length == 0){
+        let color = $('input[name=color]:checked').val();
+        if (message.val().length == 0) {
             return;
         } else {
-            socket.emit('msg send', message.val());
+            socket.emit('msg send', {message: message.val(), color: color});
         }
     });
     socket.on('msg push', function (msg) {
-        let format_date = moment().format("YYYY年MM月DD日 hh時mm分ss秒"); // 第一引数：日時、第二引数：フォーマット形式
-        $('#list').prepend($('<div class="row"><div class="col-sm-4">' + format_date + '</div><div class="col-sm-8" style="padding-left: 0;">' + msg + '</div></div>'));
+        moment().local('ja');
+        let format_date = moment().format("YYYY年MM月DD日 HH時mm分ss秒"); // 第一引数：日時、第二引数：フォーマット形式
+        $('#list').prepend($('<div class="row"><div class="col-sm-4">' + format_date + `</div><div class="col-sm-8" style="padding-left: 0; color: ${msg.color};">` + msg.message + '</div></div>'));
     });
     //接続されたらDBにあるメッセージを表示
     socket.on('msg open', function (msg) {
@@ -54,7 +56,7 @@ $(function () {
         } else {
             $('#list').empty();
             $.each(msg, function (key, value) {
-                $('#list').prepend($('<div class="row"><div class="col-sm-4">' + value.date + '</div><div class="col-sm-8" style="padding-left: 0;">' + value.message + '</div></div>'));
+                $('#list').prepend($('<div class="row"><div class="col-sm-4">' + value.date + `</div><div class="col-sm-8" style="padding-left: 0; color: ${value.color};">` + value.message + '</div></div>'));
             });
         }
     });
